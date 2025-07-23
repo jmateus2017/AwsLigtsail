@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Carrito de Compras | Mateus Tech</title>
+</head>
+<body>
+    <h1>Carrito de Compras</h1>
+    {% if productos %}
+        <ul>
+        {% for item in productos %}
+            <li>
+                {{ item.producto.nombre }} x{{ item.cantidad }} — ${{ item.producto.precio|floatformat:2|add:""|add:item.cantidad|floatformat:2 }}
+                <a href="{% url 'tienda:eliminar_del_carrito' item.producto.pk %}">Eliminar</a>
+            </li>
+        {% endfor %}
+        </ul>
+        <p><strong>Total:</strong> ${{ total }}</p>
+    {% else %}
+        <p>El carrito está vacío.</p>
+    {% endif %}
+    <a href="{% url 'tienda:lista_productos' %}">Seguir comprando</a>
+</body>
+</html>

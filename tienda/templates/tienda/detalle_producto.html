@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ producto.nombre }} | Mateus Tech</title>
+</head>
+<body>
+    <h1>{{ producto.nombre }}</h1>
+    <p>{{ producto.descripcion }}</p>
+    <p><strong>Precio:</strong> ${{ producto.precio }}</p>
+    <p>
+        {% if producto.disponible %}
+            <span>Disponible</span>
+        {% else %}
+            <span>No disponible</span>
+        {% endif %}
+    </p>
+    <a href="{% url 'tienda:agregar_al_carrito' producto.pk %}">Añadir al carrito</a> |
+    <a href="{% url 'tienda:lista_productos' %}">Volver a la tienda</a>
+</body>
+</html>

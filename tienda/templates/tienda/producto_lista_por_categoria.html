@@ -1,0 +1,119 @@
+{% extends "base_tienda.html" %}
+
+{% block title %}{{ categoria.nombre }} | Tienda Mateus Tech{% endblock %}
+
+{% block extra_head %}
+<style>
+    .cat-header {
+        background: linear-gradient(90deg, #212A3D 80%, #21C2F8 100%);
+        color: white;
+        padding: 1.3rem 2.2rem 1.12rem 2.2rem;
+        border-radius: 18px;
+        box-shadow: 0 4px 18px #21c2f83e;
+        margin: 1.3rem 0 2.2rem 0;
+    }
+    .cat-desc {
+        color: #445474; font-size:1.1rem; margin-bottom:1.8rem;
+    }
+    table {
+        width: 98%;
+        margin: auto;
+        border-collapse: collapse;
+        border-radius: 18px;
+        overflow: hidden;
+        background: #fff;
+        box-shadow: 0 7px 28px #21c2f84d;
+    }
+    th, td {
+        padding: 1rem 0.8rem;
+        text-align: left;
+    }
+    th {
+        background: #21C2F8;
+        color: #fff;
+        border-bottom: 4px solid #212A3D;
+        font-size:1.04rem;
+        font-weight:600;
+    }
+    tr:nth-child(even) { background: #e5f7fd; }
+    tr:hover { background: #bdf2fe45; }
+    img {
+        width: 98px; height: 98px;
+        object-fit: cover;
+        border-radius: 10px;
+        border: 2.5px solid #21C2F8;
+        box-shadow: 0 3px 8px #21C2F825;
+    }
+    .precio { color: #fb9300; font-size: 1.12em; font-weight: 700; }
+    .disponible { color: #25a244; }
+    .nodispo { color: #dd2222; font-weight: 600; }
+    .acciones {
+        display: flex; gap: .5rem; flex-direction: column;
+    }
+    .btn {
+        background: #21C2F8; color: #fff; border: none;
+        border-radius: 8px; padding: 0.5rem 1rem; text-decoration:none;
+        font-weight: 600; transition: background 0.19s, box-shadow 0.19s;
+        cursor: pointer; box-shadow: 0 2px 8px #21C2F825;
+    }
+    .btn:hover { background: #1A8CB9; }
+    .backlink { margin:2rem 0 1rem 0; display:block; color:#21C2F8; font-weight:600;}
+</style>
+{% endblock %}
+
+{% block content %}
+<a href="/productos/" class="backlink">&larr; Volver al catálogo completo</a>
+
+<div class="cat-header">
+    <h1 style="margin-bottom:0.2em;">{{ categoria.nombre }}</h1>
+    {% if categoria.descripcion %}
+    <div class="cat-desc">{{ categoria.descripcion }}</div>
+    {% endif %}
+</div>
+
+{% if productos %}
+    <table>
+        <thead>
+            <tr>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Disponible</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for producto in productos %}
+            <tr>
+                <td>
+                    {% if producto.imagen %}
+                        <img src="{{ producto.imagen.url }}" alt="imagen de {{ producto.nombre }}">
+                    {% else %}
+                        <img src="https://via.placeholder.com/98x98?text=Sin+Imagen" alt="Sin Imagen">
+                    {% endif %}
+                </td>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.descripcion|truncatechars:60 }}</td>
+                <td class="precio">${{ producto.precio }}</td>
+                <td>
+                    {% if producto.disponible %}
+                        <span class="disponible">Sí</span>
+                    {% else %}
+                        <span class="nodispo">No</span>
+                    {% endif %}
+                </td>
+                <td class="acciones">
+                    <a href="{% url 'tienda:detalle_producto' producto.pk producto.slug %}" class="btn">Ver detalle</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p style="text-align:center;margin-top:2rem;font-size:1.17rem;">No hay productos disponibles en esta categoría.</p>
+{% endif %}
+<div class="footer-btn">
+    <a href="{% url 'tienda:ver_carrito' %}" class="btn" style="background:#212A3D;">Ver carrito de compras</a>
+</div>
+{% endblock %}

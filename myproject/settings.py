@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'myapp',  # ¡Agrega esta línea!
+#    'myapp',  
+    'tienda',
 ]
 
 MIDDLEWARE = [
@@ -79,7 +80,18 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
+"""
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mateustech_db',
+        'USER': 'mateus_user',
+        'PASSWORD': 'Dorina75',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+"""
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -115,10 +127,22 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
+"""
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # <-- ¡Esta línea es crucial!
-
+"""
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
+# https://8000-firebase-awsligtsailgit-1752709410457.cluster-ux5mmlia3zhhask7riihruxydo.cloudworkstations.dev/
+CSRF_TRUSTED_ORIGINS = [
+    'https://8000-firebase-awsligtsailgit-1752709410457.cluster-ux5mmlia3zhhask7riihruxydo.cloudworkstations.dev'
+]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+    ##'https://8000-idx-djangoprojectwebser-1720535729192.cluster-hf4yr35cmnbd4vhbxvfvc6cp5q.cloudworkstations.dev'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'

@@ -1,0 +1,158 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>3D MateusTech: Impulsando la Innovación en Colombia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: radial-gradient(ellipse at 60% 0%, #422075 60%, #202044 90%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        .site-nav {
+            position: absolute;
+            top: 30px;
+            right: 38px;
+            z-index: 10;
+        }
+        @media (max-width: 900px) {
+            .site-nav {
+                position: static;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                gap: 12px;
+                margin-bottom: 1.3em;
+            }
+        }
+        .header-logo-box {
+            display: flex;
+            align-items: flex-end;
+            gap: 2.1rem;
+            margin-top: 3.7rem;  /* Subida para más margen con botones */
+            margin-bottom: 0.2rem;
+            justify-content: center;
+        }
+        .logo-mateus, .printer-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 20px;
+            object-fit: cover;
+            box-shadow: 0 12px 44px #35085177;
+            background: #fff0;
+        }
+        .header-content-centered {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-width: 340px;
+            max-width: 420px;
+        }
+        .main-title-mateus {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.13em;
+        }
+        .main-subtitle-mateus {
+            font-size: 1.33rem;
+            font-weight: 500;
+            margin-bottom: 0.73em;
+        }
+        .main-desc-mateus,
+        .main-desc2-mateus {
+            font-size: 1.10rem;
+            margin-bottom: 0.3em;
+        }
+        .main-desc2-mateus {
+            margin-bottom: 1.1em;
+        }
+        @media (max-width: 1000px) {
+            .header-logo-box {
+                flex-direction: column;
+                align-items: center;
+                gap: 1.4rem;
+                margin-top: 3.3rem;
+            }
+            .header-content-centered {
+                min-width: 0;
+                width: 90vw;
+                max-width: 97vw;
+            }
+        }
+        /* Catálogo */
+        .catalogo-dest {
+            margin-top: 2.7rem;
+            margin-bottom: 0.7rem;
+        }
+        .catalogo-row {
+            display: flex;
+            justify-content: center;
+            gap: 1.3rem;
+            flex-wrap: wrap;
+        }
+        .img-cat {
+            width: 115px;
+            height: 115px;
+            border-radius: 14px;
+            background: #fff;
+            object-fit: cover;
+            box-shadow: 0 7px 34px #330e5b38;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navegación superior -->
+    <div class="site-nav">
+        <a href="/productos/" class="btn btn-outline-light me-1">Catálogo de Productos</a>
+        <a href="/carrito/" class="btn btn-outline-light">Carrito</a>
+    </div>
+
+    <!-- Logo, Contenido Centralizado y Imagen Laterales de Igual Tamaño -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 d-flex flex-wrap justify-content-center header-logo-box">
+                <img src="{% static 'main/Logo3DMateusTech.jpg' %}" alt="Logo MateusTech" class="logo-mateus mb-2 mb-md-0">
+                <div class="header-content-centered">
+                    <div class="main-title-mateus">
+                        3D Mateus Tech
+                    </div>
+                    <div class="main-subtitle-mateus">
+                        Impulsando la Innovación en Colombia
+                    </div>
+                    <div class="main-desc-mateus">
+                        En un mundo que exige personalización y eficiencia, la fabricación aditiva es la clave.
+                    </div>
+                    <div class="main-desc2-mateus">
+                        3D Mateus Tech revolucionará la producción y el cuidado de la salud en Colombia
+                    </div>
+                    <div>
+                        <div class="site-nav">
+                                                      
+                         
+                        </div>
+                    </div>
+                </div>
+                <img src="{% static 'main/Impresion en 3d.jpg' %}" alt="Impresora 3D" class="printer-img mb-2 mb-md-0">
+            </div>
+        </div>
+        <!-- Catálogo Destacado -->
+        <div class="catalogo-dest pt-4">
+            <h2 class="text-center mb-3">Catálogo Destacado</h2>
+            <div class="catalogo-row">
+                <img src="{% static 'main/juguetes.jpeg' %}" alt="Juguete" class="img-cat">
+                <img src="{% static 'main/Impresion3dautomotriz.jpg' %}" alt="Repuesto" class="img-cat">
+                <img src="{% static 'main/Ferulabrazo.png' %}" alt="Férula Brazo" class="img-cat">
+                <img src="{% static 'main/FerulaSensor.png' %}" alt="Férula Sensor" class="img-cat">
+                <img src="{% static 'main/Mano.jpg' %}" alt="Mano 3D" class="img-cat">
+                <img src="{% static 'main/Pokemon.jpg' %}" alt="Pokemon" class="img-cat">
+                
+            </div>
+        </div>
+    </div>
+</body>
+</html>

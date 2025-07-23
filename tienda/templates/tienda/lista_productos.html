@@ -1,0 +1,130 @@
+{% extends "base_tienda.html" %}
+
+{% block title %}Lista de Productos | 3D Mateus Tech{% endblock %}
+
+{% block extra_head %}
+<style>
+    body { background: #f8fafc; color: #212A3D; font-family: 'Segoe UI', Arial, sans-serif; margin: 0; }
+    h1 {
+        background: linear-gradient(90deg, #212A3D 80%, #21C2F8 100%);
+        color: white;
+        padding: 1rem 2rem;
+        margin: 0 0 2rem 0;
+        box-shadow: 0 4px 16px #21c2f82b;
+        letter-spacing: 1.5px;
+    }
+    table {
+        width: 96%;
+        margin: 2rem auto 1rem auto;
+        border-collapse: collapse;
+        box-shadow: 0 6px 24px 0 #21c2f84d;
+        border-radius: 18px;
+        overflow: hidden;
+    }
+    th, td {
+        padding: 0.9rem 0.7rem;
+        text-align: left;
+    }
+    th {
+        background: #21C2F8;
+        color: #fff;
+        font-weight: 600;
+        border-bottom: 3px solid #212A3D;
+        letter-spacing: 0.5px;
+    }
+    tr:nth-child(even) { background: #e5f7fd; }
+    tr:hover { background: #bdf2fe96; }
+    img {
+        width: 98px; height: 98px;
+        object-fit: cover;
+        border-radius: 10px;
+        border: 2.5px solid #21C2F8;
+        box-shadow: 0 3px 8px #21C2F825;
+    }
+    .cat-chip {
+        display: inline-block;
+        background: #212A3D;
+        color: #fff;
+        border-radius: 7px;
+        padding: 0.2rem 0.9rem;
+        font-size: 0.98em;
+        letter-spacing: 0.6px;
+        margin-bottom: 2px;
+    }
+    .precio { color: #fb9300; font-size: 1.12em; font-weight: 700; }
+    .disponible { color: #25a244; }
+    .nodispo { color: #dd2222; font-weight: 600; }
+    .acciones {
+        display: flex;
+        gap: .5rem;
+        flex-direction: column;
+    }
+    .btn {
+        background: #21C2F8;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+        text-decoration: none;
+        font-weight: 600;
+        transition: background 0.2s, box-shadow 0.2s;
+        cursor: pointer;
+        box-shadow: 0 2px 8px #21C2F825;
+    }
+    .btn:hover { background: #1A8CB9; }
+    .footer-btn { text-align: center; margin: 2rem 0; }
+</style>
+{% endblock %}
+
+{% block content %}
+<h1>Ofertas del dia...</h1>
+{% if productos %}
+<table>
+    <thead>
+        <tr>
+            <th>Imagen</th>
+            <th>Nombre</th>
+            <th>Categoría</th>
+            <th>Descripción</th>
+            <th>Precio</th>
+            <th>Disponible</th>
+            <th>Acción</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for producto in productos %}
+        <tr>
+            <td>
+                {% if producto.imagen %}
+                    <img src="{{ producto.imagen.url }}" alt="imagen de {{ producto.nombre }}">
+                {% else %}
+                    <img src="https://via.placeholder.com/98x98?text=Sin+Imagen" alt="Sin Imagen">
+                {% endif %}
+            </td>
+            <td>{{ producto.nombre }}</td>
+            <td>
+                <span class="cat-chip">{{ producto.categoria.nombre }}</span>
+            </td>
+            <td>{{ producto.descripcion|truncatechars:60 }}</td>
+            <td class="precio">${{ producto.precio }}</td>
+            <td>
+                {% if producto.disponible %}
+                    <span class="disponible">Sí</span>
+                {% else %}
+                    <span class="nodispo">No</span>
+                {% endif %}
+            </td>
+            <td class="acciones">
+                <a href="{% url 'tienda:detalle_producto' producto.pk producto.slug %}" class="btn">Ver detalle</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+    <p style="text-align:center;margin-top:2rem;">No hay productos disponibles.</p>
+{% endif %}
+<div class="footer-btn">
+    <a href="{% url 'tienda:ver_carrito' %}" class="btn" style="background:#212A3D;">Ver carrito de compras</a>
+</div>
+{% endblock %}
